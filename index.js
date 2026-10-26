@@ -42,11 +42,11 @@ router.post('/eventos', (req, res) => {
 })
 
 router.put('/eventos/:id', (req, res) => {
-    let id = req.params.id
+    let id = Number(req.params.id)
     let indice = eventos.findIndex((evento) => evento.id === id)
 
     if (indice === -1) {
-        return res.status(404).send({ erro: "Evento não encontrado" })
+        return res.status(404).send({ erro: 'Evento não encontrado' })
     }
 
     eventos[indice].local = req.body.local
@@ -59,7 +59,7 @@ router.put('/eventos/:id', (req, res) => {
 })
 
 router.delete('/eventos/:id', (req, res) => {
-    let id = req.params.id
+    let id = Number(req.params.id)
     let indice = eventos.findIndex((evento) => evento.id === id)
 
     if (indice === -1) {
