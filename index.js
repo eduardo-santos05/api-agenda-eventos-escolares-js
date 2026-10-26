@@ -41,6 +41,23 @@ router.post('/eventos', (req, res) => {
     res.status(201).send(evento)
 })
 
+router.put('/eventos/:id', (req, res) => {
+    let id = req.params.id
+    let indice = eventos.findIndex((evento) => evento.id === id)
+
+    if (indice === -1) {
+        return res.status(404).send({ erro: "Evento não encontrado" })
+    }
+
+    eventos[indice].local = req.body.local
+
+    if (!req.body.local) {
+        return res.status(400).send({ erro: "Informe o novo local" })
+    }
+
+    res.send(eventos[indice])
+})
+
 router.listen(port, () => {
     console.log(`Servidor rodando na porta ${port}`)
 })
